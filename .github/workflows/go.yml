@@ -1,4 +1,4 @@
-name: phocus
+name: phocus_api
 
 on:
   push:
@@ -18,19 +18,8 @@ jobs:
       with:
         go-version: 1.19
 
-    - name: Set Go private repos
-      run: go env -w GOPRIVATE="github.com/wolffshots/*"
-
     - name: Build
-      run: go build -o ./phocus -v main.go
-    
-    - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v3.1.1
-      with:
-        name: phocus
-        path: phocus*
-        
+      run: go build -v ./...
+
     - name: Test
       run: go test -v ./...
-      
-
